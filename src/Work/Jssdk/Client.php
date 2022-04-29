@@ -10,32 +10,58 @@ use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
+    protected $url;
+    protected $nonceStr;
+    protected $timestamp;
     protected $ticketEndpoint = 'cgi-bin/get_jsapi_ticket';
 
     public function __construct(ServiceContainer $app, AccessTokenInterface $accessToken = null)
     {
         parent::__construct($app, $accessToken);
+
+        $this->url = $this->current_url();
+        $this->nonceStr = Str::random(16);
+        $this->timestamp =  time();
     }
 
     /**
-     * 获取前端jssdk所需要的签名数组
+     * 获取企业身份注入配置
      *
      * @return array
      * @throws InvalidArgumentException
      */
-    public function getJsConfigArray()
+    public function getCompanyConfigArray()
     {
-        $url = $this->current_url();
-        $nonceStr = Str::random(16);
-        $timestamp = time();
+        $conf = [
+            'appId'    => $this->getAppId(),
+            'nonceStr'  => $this->nonceStr,
+            'timestamp' => $this->timestamp,
+            'url'       => $this->url,
+            'signature' => $this->getTicketSignature($this->getCompanyTicket(), $this->nonceStr, $this->timestamp, $this->url),
+        ];
 
+        $merge = ['beta' => true, 'debug' => true, 'jsApiList' => []];
+
+        $config = array_merge($merge, $conf);
+
+        return $config;
+    }
+
+    /**
+     * 获取企业单应用身份注入配置
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     */
+    public function getAgentConfigArray()
+    {
         $conf = [
             'corpid'    => $this->getAppId(),
             'agentid'   => $this->getAgentId(),
-            'nonceStr'  => $nonceStr,
-            'timestamp' => $timestamp,
-            'url'       => $url,
-            'signature' => $this->getTicketSignature($this->getTicket(), $nonceStr, $timestamp, $url),
+            'nonceStr'  => $this->nonceStr,
+            'timestamp' => $this->timestamp,
+            'url'       => $this->url,
+            'signature' => $this->getTicketSignature($this->getAgentTicket(), $this->nonceStr, $this->timestamp, $this->url),
         ];
 
         $merge = ['beta' => true, 'debug' => true, 'jsApiList' => []];
@@ -53,7 +79,7 @@ class Client extends BaseClient
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function getTicket($refresh = false, $type = 'config')
+    public function getCompanyTicket($refresh = false, $type = 'config')
     {
         $cacheKey = sprintf('wechat.jssdk.ticket.%s.%s', $type, $this->getAppId());
 
