@@ -1,0 +1,20 @@
+{
+    "name": "zuogechengxu/wechat",
+    "description": "Wechat SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zhoulei",
+            "email": "lei_0668@sina.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "pimple/pimple": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zuogechengxu\\Wechat\\": "src/"
+        }
+    }
+}
