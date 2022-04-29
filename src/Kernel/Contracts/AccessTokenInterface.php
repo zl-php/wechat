@@ -1,6 +1,8 @@
 <?php
 namespace Zuogechengxu\Wechat\Kernel\Contracts;
 
+use Psr\Http\Message\RequestInterface;
+
 interface AccessTokenInterface
 {
     /**
@@ -11,4 +13,6 @@ interface AccessTokenInterface
     public function getAccessToken();
 
     public function refresh();
+
+    public function applyToRequest(RequestInterface $request, array $requestOptions = []);
 }

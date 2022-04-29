@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Cache;
 use Zuogechengxu\Wechat\Kernel\Traits\HasHttpRequest;
 use Zuogechengxu\Wechat\Kernel\Contracts\AccessTokenInterface;
 use Zuogechengxu\Wechat\Kernel\Exceptions\AccessTokenException;
+use Psr\Http\Message\RequestInterface;
 
 abstract class AccessToken implements AccessTokenInterface
 {
@@ -13,6 +14,8 @@ abstract class AccessToken implements AccessTokenInterface
     protected $app;
 
     protected $accessToken;
+
+    protected $queryName;
 
     protected $requestMethod = 'GET';
 
@@ -117,6 +120,27 @@ abstract class AccessToken implements AccessTokenInterface
     protected function getCacheKey()
     {
         return $this->cachePrefix.md5(json_encode($this->getCredentials()));
+    }
+
+    /**
+     * 追加默认参数
+     *
+     * @param RequestInterface $request
+     * @param array $requestOptions
+     * @return RequestInterface
+     */
+    public function applyToRequest(RequestInterface $request, array $requestOptions = [])
+    {
+        parse_str($request->getUri()->getQuery(), $query);
+
+        $query = http_build_query(array_merge($this->getQuery(), $query));
+
+        return $request->withUri($request->getUri()->withQuery($query));
+    }
+
+    protected function getQuery()
+    {
+        return [$this->queryName ?? $this->tokenKey => $this->getAccessToken()];
     }
 
     /**

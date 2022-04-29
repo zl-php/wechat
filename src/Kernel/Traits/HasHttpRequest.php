@@ -2,17 +2,19 @@
 namespace Zuogechengxu\Wechat\Kernel\Traits;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\ClientInterface;
 
 /**
  * Trait HasHttpRequest.
  *
- * @property string $baseUri
- * @property float  $timeout
- * @property float  $connectTimeout
+ * Trait HasHttpRequest
+ * @package Zuogechengxu\Wechat\Kernel\Traits
  */
 trait HasHttpRequest
 {
+    protected $baseUri;
+
     /**
      * Http client.
      *
@@ -27,6 +29,15 @@ trait HasHttpRequest
      */
     protected $httpOptions = [];
 
+    protected $middlewares = [];
+
+    protected $handlerStack;
+
+    protected static $defaults = [
+        'curl' => [
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+        ],
+    ];
 
     /**
      * Set http client.
@@ -62,6 +73,8 @@ trait HasHttpRequest
     {
         $method = strtoupper($method);
 
+        $options = array_merge(self::$defaults, $options, ['handler' => $this->getHandlerStack()]);
+
         $options = $this->fixJsonIssue($options);
 
         if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
@@ -72,6 +85,32 @@ trait HasHttpRequest
         $response->getBody()->rewind();
 
         return $response;
+    }
+
+    public function getHandlerStack(): HandlerStack
+    {
+        if ($this->handlerStack) {
+            return $this->handlerStack;
+        }
+
+        $this->handlerStack = HandlerStack::create($this->getGuzzleHandler());
+
+        foreach ($this->middlewares as $name => $middleware) {
+            $this->handlerStack->push($middleware, $name);
+        }
+
+        return $this->handlerStack;
+    }
+
+    protected function getGuzzleHandler()
+    {
+        if (property_exists($this, 'app') && isset($this->app['guzzle_handler'])) {
+            return is_string($handler = $this->app->raw('guzzle_handler'))
+                ? new $handler()
+                : $handler;
+        }
+
+        return \GuzzleHttp\choose_handler();
     }
 
     /**
@@ -94,5 +133,16 @@ trait HasHttpRequest
         }
 
         return $options;
+    }
+
+    public function pushMiddleware(callable $middleware, $name = null)
+    {
+        if (!is_null($name)) {
+            $this->middlewares[$name] = $middleware;
+        } else {
+            array_push($this->middlewares, $middleware);
+        }
+
+        return $this;
     }
 }

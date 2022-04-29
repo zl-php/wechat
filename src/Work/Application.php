@@ -8,6 +8,8 @@ class Application extends ServiceContainer
 {
     protected $providers = [
         Auth\ServiceProvider::class,
+        OAuth\ServiceProvider::class,
+        User\ServiceProvider::class,
         Jssdk\ServiceProvider::class,
     ];
 

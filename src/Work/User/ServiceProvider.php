@@ -1,5 +1,5 @@
 <?php
-namespace Zuogechengxu\Wechat\Work\Jssdk;
+namespace Zuogechengxu\Wechat\Work\User;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -11,7 +11,7 @@ class ServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $app)
     {
-        isset($app['jssdk']) || $app['jssdk'] = function ($app) {
+        isset($app['user']) || $app['user'] = function ($app) {
             return new Client($app);
         };
     }
