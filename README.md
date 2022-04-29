@@ -7,10 +7,15 @@
 - composer
 
 ## 安装
+```bash
+composer require zuogechengxu/wechat
+```
 
-## 使用
+## 帮助文档
 ### 初始化
 ```
+use Zuogechengxu\Wechat\Factory;
+
 $config = [
     'corp_id' => 'xxx',
     'agent_id' => xxx,
@@ -53,5 +58,17 @@ $users = $app->oauth->user($code)
 ```
 # 读取成员, 返回成员详细信息数组
 $user = $app->user->get($userid);
+
+```
+#### JSSDK
+```
+# 获取企业的 jsapi_ticket 可传参数为 true 表示不走缓存重新获取
+$ticket = $app->jssdk->getTicket()
+
+# 获取应用的jsapi_ticket 可传参数为 true 表示不走缓存重新获取
+$ticket = $app->jssdk->getAgentTicket()
+
+# 生成前端jssdk 所需要的配置数组，方便前端注入
+$config = $app->jssdk->getJsConfigArray()
 
 ```

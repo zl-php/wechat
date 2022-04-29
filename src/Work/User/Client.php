@@ -11,13 +11,13 @@ class Client extends BaseClient
     /**
      * 获取用企业用户详细信息
      *
-     * @param $userid
+     * @param $userId
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function get($userid)
+    public function get($userId)
     {
-        $response = $this->httpGet($this->endpointToUserGet, ['userid' => $userid]);
+        $response = $this->httpGet($this->endpointToUserGet, ['userid' => $userId]);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if (($result['errcode'] ?? 1) > 0 || empty($result['userid'])) {
