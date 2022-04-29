@@ -1,6 +1,6 @@
 <h1 align="center">wechat</h1>
 
-一个 Laravel 微信开发 SDK
+一个基于 Laravel 开的微信/企业微信 SDK
 
 ## 运行环境
 - PHP >= 7.4
