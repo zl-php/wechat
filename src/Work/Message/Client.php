@@ -121,7 +121,7 @@ class Client extends BaseClient
 
         return $result;
     }
-    
+
     protected function setRecipients($ids, $key)
     {
         if (is_array($ids)) {
