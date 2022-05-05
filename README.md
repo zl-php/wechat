@@ -14,7 +14,10 @@ composer require zuogechengxu/wechat
 ```
 
 ## 帮助文档
-### 初始化
+
+### 企业微信
+
+#### 初始化
 ```
 use Zuogechengxu\Wechat\Factory;
 
@@ -26,8 +29,6 @@ $config = [
 
 $app = Factory::work($config);
 ```
-
-### 企业微信
 
 #### 获取 access_token
 ```
