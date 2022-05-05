@@ -85,7 +85,7 @@ $result = $app->message->setText('普通文本消息')->toUser('xxxx')->send()
 # 发送文本卡片消息，toUser 不传为all，返回数组格式
 $data = [
     'title' => '测试卡片信息',
-    'description' => '<div style="color: red">卡片信息测试</div>',
+    'description' => '<font color='info'>卡片信息测试</div>',
     'url' => 'https://www.baidu.com'
 ];
         
