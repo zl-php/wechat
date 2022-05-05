@@ -1,6 +1,8 @@
 <h1 align="center">wechat</h1>
 
-一个基于 Laravel 开发的微信/企业微信 SDK
+一个基于 Laravel 开发的，轻量的，代码易懂的微信/企业微信 SDK
+
+目前仅支持企业微信
 
 ## 运行环境
 - PHP >= 7.4
@@ -73,4 +75,30 @@ $config = $app->jssdk->getCompanyConfigArray()
 
 # 生成前端jssdk 所需要的配置数组，方便前端注入（应用身份注入）
 $config = $app->jssdk->getAgentConfigArray()
+```
+
+#### 发送应用消息
+```
+# 发送文本消息，toUser 不传为all，返回数组格式
+$result = $app->message->setText('普通文本消息')->toUser('xxxx')->send()
+
+# 发送文本卡片消息，toUser 不传为all，返回数组格式
+$data = [
+    'title' => '测试卡片信息',
+    'description' => '<div style="color: red">卡片信息测试</div>',
+    'url' => 'https://www.baidu.com'
+];
+        
+$result = $app->message->setTextCard($data)->toUser('xxxx')->send()
+
+# 发送markdown消息，toUser 不传为all，返回数组格式
+$content = "### markdown消息测试
+> 测试详情
+>
+> 接收人：<font color='info'>zhoulei1</font>
+>
+> 时间：<font color='warning'>2022年5月5日11:20:38</font>";
+
+$result = $app->message->setMarkdown($content)->toUser('xxxx')->send()
+
 ```

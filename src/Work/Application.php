@@ -11,6 +11,7 @@ class Application extends ServiceContainer
         OAuth\ServiceProvider::class,
         User\ServiceProvider::class,
         Jssdk\ServiceProvider::class,
+        Message\ServiceProvider::class,
     ];
 
     protected $defaultConfig = [
