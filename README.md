@@ -13,7 +13,7 @@
 composer require zuogechengxu/wechat
 ```
 
-## 帮助文档
+## 帮助文档（企业微信，小程序）
 
 ### 企业微信
 
@@ -101,5 +101,60 @@ $content = "### markdown消息测试
 > 时间：<font color='warning'>2022年5月5日11:20:38</font>";
 
 $result = $app->message->setMarkdown($content)->toUser('xxxx')->send()
+
+```
+### 微信小程序
+
+#### 初始化
+```
+use Zuogechengxu\Wechat\Factory;
+
+$config = [
+    'app_id' => 'xxx',
+    'secret' => 'xxx',
+];
+
+$app = Factory::miniProgram($config);
+```
+
+#### 获取 access_token
+```
+# 获取 access_token 可传参数为 true 表示不走缓存重新获取
+$token = $app->access_token->getAccessToken()
+```
+
+#### 登录
+``` 
+# 获取 session_key，返回数组
+$result = $app->auth->session($code)
+
+```
+#### 换取用户手机号
+``` 
+# 根据 code 获取手机号码，返回数组
+# 前端组件获取code：https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhoneNumber.html
+$result = $app->phone_number->getUserPhoneNumber($code)
+
+```
+
+#### 小程序码
+``` 
+## 小程序码接口返回的是 StreamResponse 示例，需自行保存为图片
+
+# 实现微信小程序 wxacode.get 接口，第二个数组参数为可选
+$response = $app->app_code->get('pages/index/index', [
+    'width' => 600
+])
+
+# 实现微信小程序 wxacode.getUnlimited 接口，第二个数组参数为可选
+$response = $app->app_code->getUnlimit('a=1', [
+    'page'  => 'pages/index/index',
+    'width' => 600,
+])
+
+# 实现微信小程序 wxacode.createQRCode 接口，第二个数组参数为可选
+$response = $app->app_code->getQrCode('pages/index/index', [
+    'width' => 600,
+])
 
 ```
