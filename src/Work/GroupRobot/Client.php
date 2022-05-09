@@ -1,7 +1,6 @@
 <?php
 namespace Zuogechengxu\Wechat\Work\GroupRobot;
 
-use Illuminate\Support\Arr;
 use Zuogechengxu\Wechat\Kernel\BaseClient;
 use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
