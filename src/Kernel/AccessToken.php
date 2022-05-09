@@ -50,9 +50,9 @@ abstract class AccessToken implements AccessTokenInterface
 
         $this->setAccessToken($accessToken[$this->tokenKey], $accessToken['expires_in'] ?? 7200);
 
-        $this->accessToken = $accessToken[$this->tokenKey];
+        $this->accessToken = $accessToken;
 
-        return $this->accessToken;
+        return $accessToken;
     }
 
     /**
@@ -65,7 +65,10 @@ abstract class AccessToken implements AccessTokenInterface
      */
     public function setAccessToken($accessToken, $lifetime = 7200)
     {
-        Cache::put($this->getCacheKey(), $accessToken, $lifetime);
+        Cache::put($this->getCacheKey(), [
+            $this->tokenKey => $accessToken,
+            'expires_in' => $lifetime,
+        ], $lifetime);
 
         if (!Cache::has($this->getCacheKey())) {
             throw new AccessTokenException('Failed to cache access token.');
