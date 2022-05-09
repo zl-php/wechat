@@ -139,14 +139,14 @@ class Client extends BaseClient
      */
     public function getLaunchCode($operator_userid, $userid)
     {
-        $data = [
+        $params = [
             'operator_userid' => $operator_userid,
             'single_chat' => [
                 'userid' => $userid
             ]
         ];
 
-        $response = $this->httpPostJson('cgi-bin/get_launch_code', $data);
+        $response = $this->httpPostJson('cgi-bin/get_launch_code', $params);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if (($result['errcode'] ?? 1) > 0 || empty($result['launch_code'])) {
