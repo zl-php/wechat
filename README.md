@@ -1,6 +1,6 @@
-<h1 align="center">Laravel Wechat</h1>
+<h1 align="center">Laravel Wechat SDK</h1>
 
-一个基于 Laravel 开发的，轻量的，代码易懂的微信/企业微信 SDK
+一个基于 Laravel 开发的微信/企业微信 SDK
 
 目前仅支持部分小程序以及企业微信功能，持续增加中
 
