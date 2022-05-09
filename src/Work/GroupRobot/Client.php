@@ -67,6 +67,4 @@ class Client extends BaseClient
 
         return $result;
     }
-
-
 }
