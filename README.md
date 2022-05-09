@@ -8,7 +8,7 @@
 - [环境要求](#环境要求)
 - [安装](#安装)
 - [企业微信]()
-    - [初始化](docs/work/01-access-token.md)
+    - [初始化](docs/work/01-initialize.md)
     - [获取access_token](docs/work/02-access-token.md)
     - [网页授权](docs/work/03-oauth.md)
     - [通讯录](docs/work/04-contacts.md)
