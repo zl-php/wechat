@@ -12,6 +12,7 @@ class Application extends ServiceContainer
         User\ServiceProvider::class,
         Jssdk\ServiceProvider::class,
         Message\ServiceProvider::class,
+        GroupRobot\ServiceProvider::class,
     ];
 
     protected $defaultConfig = [
