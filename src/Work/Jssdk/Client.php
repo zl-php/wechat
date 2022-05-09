@@ -94,9 +94,9 @@ class Client extends BaseClient
             throw new InvalidArgumentException('Failed to cache jssdk ticket:'. json_encode($result, JSON_UNESCAPED_UNICODE));
         }
 
-        Cache::put($cacheKey, $result['ticket'],  $result['expires_in'] - 500);
+        Cache::put($cacheKey, $result,  $result['expires_in'] - 500);
 
-        return $result['ticket'];
+        return $result;
     }
 
     /**
@@ -124,10 +124,38 @@ class Client extends BaseClient
             throw new InvalidArgumentException('Failed to cache agent jssdk ticket:'. json_encode($result, JSON_UNESCAPED_UNICODE));
         }
 
-        Cache::put($cacheKey, $result['ticket'],  $result['expires_in'] - 500);
+        Cache::put($cacheKey, $result,  $result['expires_in'] - 500);
 
-        return $result['ticket'];
+        return $result;
     }
+
+    /***
+     * 获取launch_code
+     *
+     * @param $operator_userid
+     * @param $userid
+     * @return mixed
+     * @throws InvalidArgumentException
+     */
+    public function getLaunchCode($operator_userid, $userid)
+    {
+        $data = [
+            'operator_userid' => $operator_userid,
+            'single_chat' => [
+                'userid' => $userid
+            ]
+        ];
+
+        $response = $this->httpPostJson('cgi-bin/get_launch_code', $data);
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (($result['errcode'] ?? 1) > 0 || empty($result['launch_code'])) {
+            throw new InvalidArgumentException('Failed to launch code:'. json_encode($result, JSON_UNESCAPED_UNICODE));
+        }
+
+        return $result;
+    }
+
 
     protected function getAppId()
     {

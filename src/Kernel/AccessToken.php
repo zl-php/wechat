@@ -143,7 +143,7 @@ abstract class AccessToken implements AccessTokenInterface
 
     protected function getQuery()
     {
-        return [$this->queryName ?? $this->tokenKey => $this->getAccessToken()];
+        return [$this->queryName ?? $this->tokenKey => $this->getAccessToken()[$this->tokenKey]];
     }
 
     /**

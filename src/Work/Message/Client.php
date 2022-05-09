@@ -48,7 +48,6 @@ class Client extends BaseClient
 
     /**
      * 发送markdown消息
-     *
      * @param $message
      * @return $this
      */
