@@ -37,7 +37,7 @@ class Client extends BaseClient
             'nonceStr'  => $this->nonceStr,
             'timestamp' => $this->timestamp,
             'url'       => $this->url,
-            'signature' => $this->getTicketSignature($this->getCompanyTicket(), $this->nonceStr, $this->timestamp, $this->url),
+            'signature' => $this->getTicketSignature($this->getCompanyTicket()['ticket'], $this->nonceStr, $this->timestamp, $this->url),
         ];
 
         $merge = ['beta' => true, 'debug' => true, 'jsApiList' => []];
@@ -61,7 +61,7 @@ class Client extends BaseClient
             'nonceStr'  => $this->nonceStr,
             'timestamp' => $this->timestamp,
             'url'       => $this->url,
-            'signature' => $this->getTicketSignature($this->getAgentTicket(), $this->nonceStr, $this->timestamp, $this->url),
+            'signature' => $this->getTicketSignature($this->getAgentTicket()['ticket'], $this->nonceStr, $this->timestamp, $this->url),
         ];
 
         $merge = ['beta' => true, 'debug' => true, 'jsApiList' => []];
