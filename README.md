@@ -34,4 +34,5 @@
 ```shell
 composer require zuogechengxu/wechat
 ```
-
+## 说明
+因该项目缓存 Token 直接使用了 Cache 的 Facades，建议将 CACHE_DRIVER=file 改为 CACHE_DRIVER=redis
