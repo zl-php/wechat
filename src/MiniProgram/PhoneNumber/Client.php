@@ -7,7 +7,6 @@
 namespace Zuogechengxu\Wechat\MiniProgram\PhoneNumber;
 
 use Zuogechengxu\Wechat\Kernel\BaseClient;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -16,7 +15,6 @@ class Client extends BaseClient
      *
      * @param $code
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getUserPhoneNumber($code)
     {
@@ -24,12 +22,7 @@ class Client extends BaseClient
             'code' => $code
         ];
 
-        $response = $this->httpPostJson('wxa/business/getuserphonenumber', $params);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['phone_info'])) {
-            throw new InvalidArgumentException('Failed to user phone:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
+        $result = $this->httpPostJson('wxa/business/getuserphonenumber', $params);
 
         return $result['phone_info'];
     }

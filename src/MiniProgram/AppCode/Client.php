@@ -23,7 +23,7 @@ class Client extends BaseClient
             'path' => $path,
         ], $optional);
 
-        $response = $this->httpPostJson('wxa/getwxacode', $params);
+        $response = $this->request('wxa/getwxacode', 'POST', ['json' => $params], true);
 
         return $response->getBody()->getContents();
     }
@@ -41,7 +41,7 @@ class Client extends BaseClient
             'scene' => $scene,
         ], $optional);
 
-        $response = $this->httpPostJson('wxa/getwxacodeunlimit', $params);
+        $response = $this->request('wxa/getwxacodeunlimit', 'POST', ['json' => $params], true);
 
         return $response->getBody()->getContents();
     }
@@ -55,7 +55,7 @@ class Client extends BaseClient
      */
     public function getQrCode($path, $width = null)
     {
-        $response = $this->httpPostJson('cgi-bin/wxaapp/createwxaqrcode', compact('path', 'width'));
+        $response = $this->request('cgi-bin/wxaapp/createwxaqrcode', 'POST', ['json' => compact('path', 'width')], true);
 
         return $response->getBody()->getContents();
     }

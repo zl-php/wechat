@@ -10,6 +10,7 @@ namespace Zuogechengxu\Wechat\Kernel;
 use Psr\Http\Message\RequestInterface;
 use Zuogechengxu\Wechat\Kernel\Traits\HasHttpRequest;
 use Zuogechengxu\Wechat\Kernel\Contracts\AccessTokenInterface;
+use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class BaseClient
 {
@@ -41,7 +42,7 @@ class BaseClient
         return $this->request($url, 'POST', ['query' => $query, 'json' => $data]);
     }
 
-    public function request($url, $method = 'GET', array $options = [])
+    public function request($url, $method = 'GET', array $options = [], $returnRaw = false)
     {
         if (empty($this->middlewares)) {
             $this->registerHttpMiddlewares();
@@ -49,13 +50,29 @@ class BaseClient
 
         $response = $this->performRequest($url, $method, $options);
 
-        return $response;
+        return  $returnRaw ? $response : $this->response($response);
     }
 
     protected function registerHttpMiddlewares()
     {
         // access token
         $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
+    }
+
+    // 转换为数组
+    protected function response($response)
+    {
+        try {
+            $result = json_decode($response->getBody()->getContents(), true);
+
+            if (isset($result['errcode']) && ($result['errcode'] ?? 1) > 0) {
+                throw new InvalidArgumentException($result['errmsg'] ?: 'unknown error message'. json_encode($result, JSON_UNESCAPED_UNICODE));
+            }
+
+            return $result;
+        } catch (\InvalidArgumentException $e) {
+            return $response;
+        }
     }
 
     protected function accessTokenMiddleware()

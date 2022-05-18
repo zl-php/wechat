@@ -2,7 +2,6 @@
 namespace Zuogechengxu\Wechat\Work\GroupRobot;
 
 use Zuogechengxu\Wechat\Kernel\BaseClient;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -52,19 +51,11 @@ class Client extends BaseClient
      * 发送消息
      *
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function send()
     {
         $this->accessToken = null;
 
-        $response = $this->httpPostJson($this->endpointToMessage, $this->patch, ['key' => $this->groupKey]);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0) {
-            throw new InvalidArgumentException('Failed to Send the message successfully:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
-
-        return $result;
+        return $this->httpPostJson($this->endpointToMessage, $this->patch, ['key' => $this->groupKey]);
     }
 }

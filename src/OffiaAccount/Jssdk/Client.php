@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Zuogechengxu\Wechat\Kernel\BaseClient;
 use Zuogechengxu\Wechat\Kernel\Contracts\AccessTokenInterface;
 use Zuogechengxu\Wechat\Kernel\ServiceContainer;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -30,7 +29,6 @@ class Client extends BaseClient
      * @param $refresh
      * @param $type
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getTicket($refresh = false, $type = 'jsapi')
     {
@@ -40,12 +38,7 @@ class Client extends BaseClient
             return $result;
         }
 
-        $response = $this->httpGet($this->ticketEndpoint, []);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['ticket'])) {
-            throw new InvalidArgumentException('Failed to cache jssdk ticket:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
+        $result = $this->httpGet($this->ticketEndpoint, []);
 
         Cache::put($cacheKey, $result,  $result['expires_in'] - 500);
 
@@ -56,7 +49,6 @@ class Client extends BaseClient
      * 获取企业身份注入配置
      *
      * @return array
-     * @throws InvalidArgumentException
      */
     public function getConfigSignatureArray()
     {
@@ -91,5 +83,4 @@ class Client extends BaseClient
     {
         return sha1(sprintf('jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s', $ticket, $nonceStr, $timestamp, $url));
     }
-
 }

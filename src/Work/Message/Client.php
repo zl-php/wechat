@@ -3,7 +3,6 @@ namespace Zuogechengxu\Wechat\Work\Message;
 
 use Illuminate\Support\Arr;
 use Zuogechengxu\Wechat\Kernel\BaseClient;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -100,7 +99,6 @@ class Client extends BaseClient
      * 发送消息
      *
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function send()
     {
@@ -111,14 +109,7 @@ class Client extends BaseClient
 
         $this->secretive = false;
 
-        $response = $this->httpPostJson($this->endpointToMessage, $message);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['msgid'])) {
-            throw new InvalidArgumentException('Failed to Send the message successfully:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
-
-        return $result;
+        return $this->httpPostJson($this->endpointToMessage, $message);
     }
 
     protected function setRecipients($ids, $key)

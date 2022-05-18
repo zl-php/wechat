@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Zuogechengxu\Wechat\Kernel\BaseClient;
 use Zuogechengxu\Wechat\Kernel\Contracts\AccessTokenInterface;
 use Zuogechengxu\Wechat\Kernel\ServiceContainer;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -28,7 +27,6 @@ class Client extends BaseClient
      * 获取企业身份注入配置
      *
      * @return array
-     * @throws InvalidArgumentException
      */
     public function getCompanyConfigArray()
     {
@@ -51,7 +49,6 @@ class Client extends BaseClient
      * 获取企业单应用身份注入配置
      *
      * @return array
-     * @throws InvalidArgumentException
      */
     public function getAgentConfigArray()
     {
@@ -77,7 +74,6 @@ class Client extends BaseClient
      * @param bool $refresh
      * @param string $type
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getCompanyTicket($refresh = false, $type = 'config')
     {
@@ -87,12 +83,7 @@ class Client extends BaseClient
             return $result;
         }
 
-        $response = $this->httpGet($this->ticketEndpoint, []);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['ticket'])) {
-            throw new InvalidArgumentException('Failed to cache jssdk ticket:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
+        $result = $this->httpGet($this->ticketEndpoint, []);
 
         Cache::put($cacheKey, $result,  $result['expires_in'] - 500);
 
@@ -105,7 +96,6 @@ class Client extends BaseClient
      * @param bool $refresh
      * @param string $type
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getAgentTicket($refresh = false, $type = 'agent_config')
     {
@@ -117,12 +107,7 @@ class Client extends BaseClient
             return $result;
         }
 
-        $response = $this->httpGet($this->ticketEndpoint, ['type' => $type]);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['ticket'])) {
-            throw new InvalidArgumentException('Failed to cache agent jssdk ticket:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
+        $result = $this->httpGet($this->ticketEndpoint, ['type' => $type]);
 
         Cache::put($cacheKey, $result,  $result['expires_in'] - 500);
 
@@ -135,7 +120,6 @@ class Client extends BaseClient
      * @param $operator_userid
      * @param $userid
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getLaunchCode($operator_userid, $userid)
     {
@@ -146,16 +130,8 @@ class Client extends BaseClient
             ]
         ];
 
-        $response = $this->httpPostJson('cgi-bin/get_launch_code', $params);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['launch_code'])) {
-            throw new InvalidArgumentException('Failed to launch code:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
-
-        return $result;
+        return $this->httpPostJson('cgi-bin/get_launch_code', $params);
     }
-
 
     protected function getAppId()
     {

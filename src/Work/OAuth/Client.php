@@ -3,7 +3,6 @@ namespace Zuogechengxu\Wechat\Work\OAuth;
 
 use Zuogechengxu\Wechat\Kernel\BaseClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -35,18 +34,10 @@ class Client extends BaseClient
      *
      * @param $code
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function user($code)
     {
-        $response = $this->httpGet($this->endpointToGetUser, ['code' => $code]);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || (empty($result['UserId']) && empty($result['OpenId']))) {
-            throw new InvalidArgumentException('Failed to get user userid: '. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
-
-        return $result;
+        return $this->httpGet($this->endpointToGetUser, ['code' => $code]);
     }
 
 }

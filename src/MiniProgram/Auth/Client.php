@@ -7,7 +7,6 @@
 namespace Zuogechengxu\Wechat\MiniProgram\Auth;
 
 use Zuogechengxu\Wechat\Kernel\BaseClient;
-use Zuogechengxu\Wechat\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
@@ -16,7 +15,6 @@ class Client extends BaseClient
      *
      * @param $code
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function session($code)
     {
@@ -27,13 +25,6 @@ class Client extends BaseClient
             'grant_type' => 'authorization_code',
         ];
 
-        $response = $this->httpGet('sns/jscode2session', $params);
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        if (($result['errcode'] ?? 1) > 0 || empty($result['openid'])) {
-            throw new InvalidArgumentException('Failed to session key:'. json_encode($result, JSON_UNESCAPED_UNICODE));
-        }
-
-        return $result;
+        return $this->httpGet('sns/jscode2session', $params);
     }
 }
