@@ -6,5 +6,5 @@
 
 ```php
 // 根据 code 获取手机号码，返回数组
-$result = $app->auth->session($code)
+$result = $app->auth->getUserPhoneNumber($code)
 ```
