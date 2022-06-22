@@ -19,8 +19,8 @@ class Client extends BaseClient
             'appid' => $this->app['config']['corp_id'],
             'redirect_uri' => $callbackUrl,
             'response_type' => 'code',
-            'scope' => $this->app['config']['oauth.scopes'] ?? 'snsapi_base',
-            'state' => $this->app['config']['oauth.state'] ?? 'state'
+            'scope' => $this->app['config']->get('oauth.scope') ?? 'snsapi_base',
+            'state' => $this->app['config']->get('oauth.state') ?? 'state'
         ];
 
         $url = sprintf('https://open.weixin.qq.com/connect/oauth2/authorize?%s#wechat_redirect', http_build_query($queries));
@@ -39,5 +39,4 @@ class Client extends BaseClient
     {
         return $this->httpGet($this->endpointToGetUser, ['code' => $code]);
     }
-
 }
