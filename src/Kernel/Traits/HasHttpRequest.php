@@ -42,8 +42,6 @@ trait HasHttpRequest
     /**
      * Set http client.
      *
-     * @author yansongda <me@yansongda.cn>
-     *
      * @return $this
      */
     public function setHttpClient(ClientInterface $httpClient)
