@@ -11,6 +11,7 @@ class Application extends ServiceContainer
         OA\ServiceProvider::class,
         OAuth\ServiceProvider::class,
         User\ServiceProvider::class,
+        Department\ServiceProvider::class,
         Jssdk\ServiceProvider::class,
         Message\ServiceProvider::class,
         GroupRobot\ServiceProvider::class,

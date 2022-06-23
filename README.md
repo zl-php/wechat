@@ -13,6 +13,7 @@
     - [网页授权](docs/work/03-oauth.md)
     - [OA](docs/work/08-oa.md)
     - [通讯录](docs/work/04-contacts.md)
+    - [部门管理](docs/work/09-department.md)
     - [JS-SDK](docs/work/05-jssdk.md)
     - [消息推送](docs/work/06-message.md)
     - [群机器人](docs/work/07-group-robot.md)
