@@ -73,7 +73,7 @@ trait HasHttpRequest
 
         $options = array_merge(self::$defaults, $options, ['handler' => $this->getHandlerStack()]);
 
-        $options = $this->fixJsonIssue($options);
+        $options = $this->isJsonOptions($options);
 
         if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
             $options['base_uri'] = $this->baseUri;
@@ -116,7 +116,7 @@ trait HasHttpRequest
      *
      * @return array
      */
-    protected function fixJsonIssue(array $options): array
+    protected function isJsonOptions(array $options): array
     {
         if (isset($options['json']) && is_array($options['json'])) {
             $options['headers'] = array_merge($options['headers'] ?? [], ['Content-Type' => 'application/json']);
