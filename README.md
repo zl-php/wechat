@@ -15,8 +15,8 @@
     - [通讯录](docs/work/04-contacts.md)
     - [部门管理](docs/work/09-department.md)
     - [JS-SDK](docs/work/05-jssdk.md)
-    - [消息推送](docs/work/06-message.md)
-    - [群机器人](docs/work/07-group-robot.md)
+    - [消息发送](docs/work/06-message.md)
+    - [机器人](docs/work/07-group-robot.md)
 - [微信公众号](docs/offiaaccount/01-initialize.md)
     - [初始化](docs/offiaaccount/01-initialize.md)
     - [获取access_token](docs/offiaaccount/02-access-token.md)
@@ -25,8 +25,8 @@
     - [初始化](docs/miniprogram/01-initialize.md)
     - [获取access_token](docs/miniprogram/02-access-token.md)
     - [登录](docs/miniprogram/03-login.md)
-    - [获取手机号](docs/miniprogram/04-phonenumber.md)
-    - [小程序码](docs/miniprogram/05-appcode.md)
+    - [获取手机](docs/miniprogram/04-phonenumber.md)
+    - [小程序QR](docs/miniprogram/05-appcode.md)
 ## 环境要求
 - PHP >= 7.4
 
