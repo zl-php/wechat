@@ -11,7 +11,7 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * 实现小程序 auth.code2Session 接口
+     * auth.code2Session
      *
      * @param $code
      * @return mixed

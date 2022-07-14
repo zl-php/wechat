@@ -24,8 +24,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取 jsapi_ticket
-     *
      * @param $refresh
      * @param $type
      * @return mixed
@@ -46,8 +44,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取企业身份注入配置
-     *
      * @return array
      */
     public function getConfigSignatureArray()

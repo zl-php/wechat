@@ -10,8 +10,6 @@ class Client extends BaseClient
     protected $endpointToMessage = 'cgi-bin/webhook/send';
 
     /**
-     * 文本消息
-     *
      * @param $message
      * @return $this
      */
@@ -26,7 +24,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 发送markdown消息
      * @param $message
      * @return $this
      */
@@ -48,8 +45,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 发送消息
-     *
      * @return mixed
      */
     public function send()

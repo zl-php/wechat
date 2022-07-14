@@ -13,8 +13,6 @@ class Client extends BaseClient
     protected $endpointToMessage = 'cgi-bin/message/send';
 
     /**
-     * 文本消息
-     *
      * @param $message
      * @return $this
      */
@@ -29,8 +27,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 文本卡片消息
-     *
      * @param array $message ['title', 'description', 'url']
      * @param string $btn_txt
      * @return $this
@@ -46,7 +42,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 发送markdown消息
      * @param $message
      * @return $this
      */
@@ -61,8 +56,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 接收消息的成员，默认为all
-     *
      * @param array|string $userIds
      * @return Client
      */
@@ -72,8 +65,6 @@ class Client extends BaseClient
     }
 
     /**
-     *  接收消息的部门
-     *
      * @param $partyIds array|string $partyIds
      * @return Client
      */
@@ -83,8 +74,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取应用id
-     *
      * @param $agentId
      * @return $this
      */
@@ -96,8 +85,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 发送消息
-     *
      * @return mixed
      */
     public function send()

@@ -11,8 +11,6 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * 获取小程序码，适用于需要的码数量较少的业务场景。通过该接口生成的小程序码，永久有效，有数量限制
-     *
      * @param $path
      * @param array $optional
      * @return mixed
@@ -29,8 +27,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取小程序码，适用于需要的码数量极多的业务场景。通过该接口生成的小程序码，永久有效，数量暂无限制
-     *
      * @param $scene
      * @param array $optional
      * @return mixed
@@ -47,8 +43,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取小程序二维码，适用于需要的码数量较少的业务场景。通过该接口生成的小程序码，永久有效，有数量限制
-     *
      * @param $path
      * @param null $width
      * @return mixed

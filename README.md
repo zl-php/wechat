@@ -16,7 +16,7 @@
     - [部门管理](docs/work/09-department.md)
     - [JS-SDK](docs/work/05-jssdk.md)
     - [消息发送](docs/work/06-message.md)
-    - [机器人](docs/work/07-group-robot.md)
+    - [群机器人](docs/work/07-group-robot.md)
 - [微信公众号](docs/offiaaccount/01-initialize.md)
     - [初始化](docs/offiaaccount/01-initialize.md)
     - [获取access_token](docs/offiaaccount/02-access-token.md)

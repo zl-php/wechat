@@ -9,7 +9,6 @@ class Client extends BaseClient
     protected $endpointToGetUser = 'cgi-bin/user/getuserinfo';
 
     /**
-     * 获取网页授权url
      * @param $callbackUrl
      * @return RedirectResponse
      */
@@ -30,8 +29,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取用户信息
-     *
      * @param $code
      * @return mixed
      */

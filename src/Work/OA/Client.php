@@ -6,7 +6,6 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * 获取企业所有打卡规则
      * @return mixed
      */
     public function corpCheckinRules()
@@ -15,7 +14,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取员工打卡规则
      *
      * @param int $datetime
      * @param array $userList
@@ -32,7 +30,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取打卡记录数据
      * @param int $startTime
      * @param int $endTime
      * @param array $userList
@@ -52,8 +49,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取打卡日报数据
-     *
      * @param int $startTime
      * @param int $endTime
      * @param array $userids array
@@ -71,8 +66,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取打卡月报数据
-     *
      * @param int $startTime
      * @param int $endTime
      * @param array $userids
@@ -90,8 +83,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取公费电话拨打记录
-     *
      * @param int $startTime
      * @param int $endTime
      * @param int $offset

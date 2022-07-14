@@ -24,8 +24,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取企业身份注入配置
-     *
      * @return array
      */
     public function getCompanyConfigArray()
@@ -46,8 +44,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取企业单应用身份注入配置
-     *
      * @return array
      */
     public function getAgentConfigArray()
@@ -69,8 +65,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取企业的jsapi_ticket
-     *
      * @param bool $refresh
      * @param string $type
      * @return mixed
@@ -91,8 +85,6 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取单个应用的jsapi_ticket
-     *
      * @param bool $refresh
      * @param string $type
      * @return mixed
@@ -115,8 +107,6 @@ class Client extends BaseClient
     }
 
     /***
-     * 获取launch_code
-     *
      * @param $operator_userid
      * @param $userid
      * @return mixed

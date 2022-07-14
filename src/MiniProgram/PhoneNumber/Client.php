@@ -11,8 +11,6 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * code换取用户手机号。 每个code只能使用一次
-     *
      * @param $code
      * @return mixed
      */
