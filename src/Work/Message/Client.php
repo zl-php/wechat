@@ -56,6 +56,21 @@ class Client extends BaseClient
     }
 
     /**
+     * Template Card Message
+     * @param $message ('text_notice', 'news_notice', 'vote_interaction', 'multiple_interaction')
+     * @return $this
+     */
+    public function setTemplateCard(array $message)
+    {
+        $this->patch = [
+            'msgtype' => 'template_card',
+            'template_card' => $message
+        ];
+
+        return $this;
+    }
+
+    /**
      * @param array|string $userIds
      * @return Client
      */
