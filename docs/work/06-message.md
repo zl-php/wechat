@@ -28,6 +28,15 @@ $content = "### markdown消息测试
 $result = $app->message->setMarkdown($content)->toUser('xxxx')->send()
 
 
+// 发送图文消息，图文消息（mpnews）
+$content = [
+    'title' => 'Title',
+    ......
+];
+
+$result = $app->message->setNews($content)->toUser('xxxx')->send()
+$result = $app->message->setMpNews($content)->toUser('xxxx')->send()
+
 // 模板卡片消息，不使用 toUser 方法则向该企业应用的全部成员发送，返回数组格式
 // 以图文展示型为例，调用
 $message = [

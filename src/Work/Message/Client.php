@@ -42,6 +42,37 @@ class Client extends BaseClient
     }
 
     /**
+     * news
+     * @param $message
+     * @return $this
+     */
+    public function setNews($message)
+    {
+        $this->patch = [
+            'msgtype' => 'news',
+            'news' => ['articles' => $message]
+        ];
+
+        return $this;
+    }
+
+    /**
+     * mpnews
+     * @param $message
+     * @return $this
+     */
+    public function setMpNews($message)
+    {
+        $this->patch = [
+            'msgtype' => 'mpnews',
+            'mpnews' => ['articles' => $message]
+        ];
+
+        return $this;
+    }
+
+    /**
+     * markdown
      * @param $message
      * @return $this
      */
