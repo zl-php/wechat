@@ -1,8 +1,8 @@
 <h1 align="center">Laravel Wechat SDK</h1>
 
-一个基于 Laravel 开发的微信/企业微信 SDK
+一个基于 Laravel 开发的企业微信/微信 SDK
 
-目前仅支持部分小程序、公众号以及企业微信功能，持续增加中
+该仓库目前大部分应用于企业微信的日常开发，支持部分小程序和公众号接口，如需其他接口支持请提 issues
 
 ## 目录
 - [环境要求](#环境要求)
@@ -46,4 +46,5 @@ composer config -g repos.packagist composer https://mirrors.tencent.com/composer
 composer require zuogechengxu/wechat
 ```
 ## 说明
+
 因该项目缓存 Token 直接使用了Laravel Cache 的 Facades，建议将 CACHE_DRIVER=file 改为 CACHE_DRIVER=redis
