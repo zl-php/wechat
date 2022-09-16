@@ -28,7 +28,7 @@
     - [获取手机](docs/miniprogram/04-phonenumber.md)
     - [小程序QR](docs/miniprogram/05-appcode.md)
 ## 环境要求
-- PHP >= 7.0
+- PHP >= 7.1
 
 ## 安装
 使用 [composer](http://getcomposer.org/):
