@@ -11,46 +11,56 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * @param $path
+     * @param string $path
      * @param array $optional
-     * @return mixed
+     * @return string
      */
-    public function get($path, array $optional = [])
+    public function get(string $path, array $optional = [])
     {
         $params = array_merge([
             'path' => $path,
         ], $optional);
 
-        $response = $this->request('wxa/getwxacode', 'POST', ['json' => $params], true);
-
-        return $response->getBody()->getContents();
+        return $this->getStream('wxa/getwxacode', $params);
     }
 
     /**
-     * @param $scene
+     * @param string $scene
      * @param array $optional
-     * @return mixed
+     * @return string
      */
-    public function getUnlimit($scene, array $optional = [])
+    public function getUnlimit(string $scene, array $optional = [])
     {
         $params = array_merge([
             'scene' => $scene,
         ], $optional);
 
-        $response = $this->request('wxa/getwxacodeunlimit', 'POST', ['json' => $params], true);
-
-        return $response->getBody()->getContents();
+        return $this->getStream('wxa/getwxacodeunlimit', $params);
     }
 
     /**
-     * @param $path
-     * @param null $width
-     * @return mixed
+     * @param string $path
+     * @param int|null $width
+     * @return string
      */
-    public function getQrCode($path, $width = null)
+    public function getQrCode(string $path, int $width = null)
     {
-        $response = $this->request('cgi-bin/wxaapp/createwxaqrcode', 'POST', ['json' => compact('path', 'width')], true);
+        return $this->getStream('cgi-bin/wxaapp/createwxaqrcode', compact('path', 'width'));
+    }
 
-        return $response->getBody()->getContents();
+    /**
+     * @param string $endpoint
+     * @param array $params
+     * @return mixed|string
+     */
+    protected function getStream(string $endpoint, array $params)
+    {
+        $response = $this->request($endpoint, 'POST', ['json' => $params], true);
+
+        if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
+            return $response->getBody()->getContents();
+        }
+
+        return $this->response($response);
     }
 }
