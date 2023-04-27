@@ -10,5 +10,6 @@ class Application extends ServiceContainer
         Auth\ServiceProvider::class,
         AppCode\ServiceProvider::class,
         PhoneNumber\ServiceProvider::class,
+        SubscribeMessage\ServiceProvider::class,
     ];
 }
