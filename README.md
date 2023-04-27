@@ -27,6 +27,7 @@
     - [登录](docs/miniprogram/03-login.md)
     - [获取手机](docs/miniprogram/04-phonenumber.md)
     - [小程序QR](docs/miniprogram/05-appcode.md)
+    - [订阅消息](docs/miniprogram/06-subscribe-message.md)
 ## 环境要求
 - PHP >= 7.1
 
