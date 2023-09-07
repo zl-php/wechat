@@ -12,9 +12,10 @@ class Application extends ServiceContainer
         OAuth\ServiceProvider::class,
         User\ServiceProvider::class,
         Department\ServiceProvider::class,
+        Tag\ServiceProvider::class,
         Jssdk\ServiceProvider::class,
         Message\ServiceProvider::class,
-        GroupRobot\ServiceProvider::class,
+        GroupRobot\ServiceProvider::class
     ];
 
     protected $defaultConfig = [

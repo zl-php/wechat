@@ -14,6 +14,7 @@
     - [OA](docs/work/08-oa.md)
     - [通讯录](docs/work/04-contacts.md)
     - [部门管理](docs/work/09-department.md)
+    - [标签管理](docs/work/10-tag.md)
     - [JS-SDK](docs/work/05-jssdk.md)
     - [消息发送](docs/work/06-message.md)
     - [群机器人](docs/work/07-group-robot.md)
