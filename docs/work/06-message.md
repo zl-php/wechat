@@ -3,6 +3,16 @@
 官方文档：https://developer.work.weixin.qq.com/document/path/90236
 
 ```php
+
+/**
+ * 支持的方法，详细可查看源码
+ * 
+ * toUser($userIds) $userIds array|string 
+ * toParty($partyIds) $partyIds array|string
+ * toTag($tagIds) $tagIds array|string
+ * 
+*/
+
 // 发送文本消息，不使用 toUser 方法则向该企业应用的全部成员发送，返回数组格式
 $result = $app->message->setText('普通文本消息')->toUser('xxxx')->send()
 

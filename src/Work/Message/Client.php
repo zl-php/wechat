@@ -6,10 +6,29 @@ use Zuogechengxu\Wechat\Kernel\BaseClient;
 
 class Client extends BaseClient
 {
+    /**
+     * @var array
+     */
     protected $patch;
+
+    /**
+     * @var array
+     */
     protected $to = ['touser' => '@all'];
+
+    /**
+     * @var int
+     */
     protected $agentId;
+
+    /**
+     * @var bool
+     */
     protected $secretive = false;
+
+    /**
+     * @var string
+     */
     protected $endpointToMessage = 'cgi-bin/message/send';
 
     /**
@@ -102,7 +121,7 @@ class Client extends BaseClient
     }
 
     /**
-     * @param array|string $userIds
+     * @param $userIds array|string
      * @return Client
      */
     public function toUser($userIds)
@@ -111,12 +130,28 @@ class Client extends BaseClient
     }
 
     /**
-     * @param $partyIds array|string $partyIds
+     * @param $partyIds array|string
      * @return Client
      */
     public function toParty($partyIds)
     {
         return $this->setRecipients($partyIds, 'toparty');
+    }
+
+    /**
+     * @param $tagIds array|string
+     * @return $this
+     */
+    public function toTag($tagIds)
+    {
+        return $this->setRecipients($tagIds, 'totag');
+    }
+
+    public function secretive()
+    {
+        $this->secretive = true;
+
+        return $this;
     }
 
     /**
