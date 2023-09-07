@@ -21,7 +21,7 @@ class Application extends ServiceContainer
     protected $defaultConfig = [
         'http' => [
             'base_uri' => 'https://qyapi.weixin.qq.com/',
-        ],
+        ]
     ];
 
 }
