@@ -11,5 +11,8 @@ class Application extends ServiceContainer
         AppCode\ServiceProvider::class,
         PhoneNumber\ServiceProvider::class,
         SubscribeMessage\ServiceProvider::class,
+        UrlScheme\ServiceProvider::class,
+        UrlLink\ServiceProvider::class,
+        ShortLink\ServiceProvider::class,
     ];
 }
